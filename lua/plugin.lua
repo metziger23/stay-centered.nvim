@@ -23,6 +23,12 @@ local function stay_centered(ctx)
 	end
 
 	local line = vim.api.nvim_win_get_cursor(0)[1]
+
+	if ctx.cfg.scroll_wheel_moving_is_active then
+		vim.b.last_line = line
+		return
+	end
+
 	if vim.b.last_line == nil then
 		vim.b.last_line = line
 	end

@@ -6,6 +6,7 @@ M.cfg = {
 	active = true, -- for internally disabling plugin behavior
 	allow_scroll_move = true,
 	disable_on_mouse = true,
+	scroll_wheel_moving_is_active = false,
 }
 
 M.setup = function(ctx)
@@ -95,6 +96,10 @@ M.mouse_callback = function(key, typed)
 		vim.b.last_line = vim.api.nvim_win_get_cursor(0)[1]
 		M.activate()
 	end
+
+	local scrollWheelUp = vim.api.nvim_replace_termcodes("<ScrollWheelUp>", true, true, true)
+	local scrollWheelDown = vim.api.nvim_replace_termcodes("<ScrollWheelDown>", true, true, true)
+	M.cfg.scroll_wheel_moving_is_active = key == scrollWheelUp or key == scrollWheelDown
 end
 
 return M
